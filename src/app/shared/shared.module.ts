@@ -6,8 +6,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {
+  MatSnackBarModule,
+  MatSnackBarRef,
+  MAT_SNACK_BAR_DATA,
+} from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
+import { AlertComponent } from './components/alert/alert.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LocaleComponent } from './components/locale/locale.component';
@@ -19,6 +25,17 @@ import { LocaleComponent } from './components/locale/locale.component';
     HeaderComponent,
     FooterComponent,
     LocaleComponent,
+    AlertComponent,
+  ],
+  providers: [
+    {
+      provide: MatSnackBarRef,
+      useValue: {},
+    },
+    {
+      provide: MAT_SNACK_BAR_DATA,
+      useValue: {},
+    },
   ],
   imports: [
     CommonModule,
@@ -32,12 +49,14 @@ import { LocaleComponent } from './components/locale/locale.component';
     MatInputModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   exports: [
     // components
     HeaderComponent,
     FooterComponent,
     LocaleComponent,
+    AlertComponent,
 
     // material
     MatIconModule,
@@ -47,6 +66,7 @@ import { LocaleComponent } from './components/locale/locale.component';
     MatInputModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}
