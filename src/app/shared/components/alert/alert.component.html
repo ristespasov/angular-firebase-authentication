@@ -1,0 +1,9 @@
+<div class="alert {{ getClass }}">
+  <div class="alert-icon">
+    <img src="{{ getIcon }}" />
+  </div>
+  <div class="alert-message">{{ data.message }}</div>
+  <div (click)="snackBarRef.dismiss()" class="alert-close">
+    <img src="../../../../assets/icons/close.png" />
+  </div>
+</div>

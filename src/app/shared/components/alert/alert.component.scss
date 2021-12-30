@@ -1,0 +1,13 @@
+.alert {
+  display: flex;
+  align-items: center;
+}
+
+.alert-message {
+  padding: 0 12px;
+}
+
+.alert-close {
+  cursor: pointer;
+  margin-left: auto;
+}
