@@ -1,5 +1,6 @@
 <div class="auth-container">
   <mat-card class="auth-card">
+    <mat-spinner *ngIf="isSpinning"></mat-spinner>
     <mat-card-title class="auth-card-title">Log in</mat-card-title>
     <mat-card-content>
       <form class="auth-form" [formGroup]="loginForm" (submit)="onSubmit()">
@@ -14,18 +15,20 @@
           <mat-label>Password</mat-label>
           <input
             matInput
-            [type]="hide ? 'password' : 'text'"
+            [type]="isHidden ? 'password' : 'text'"
             placeholder="Password"
             formControlName="password"
           />
           <button
             mat-icon-button
             matSuffix
-            (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
+            (click)="isHidden = !isHidden"
+            [attr.aria-label]="'isHidden password'"
+            [attr.aria-pressed]="isHidden"
           >
-            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            <mat-icon>{{
+              isHidden ? "visibility_off" : "visibility"
+            }}</mat-icon>
           </button>
           <mat-error *ngIf="password.touched && email.hasError('required')"
             >Password is required</mat-error

@@ -11,7 +11,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   destroy$ = new Subject();
-  hide = true;
+  isHidden: boolean = true;
+  isSpinning: boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -34,6 +35,8 @@ export class LoginComponent {
       return;
     }
 
+    this.isSpinning = true;
+
     const formValue = this.loginForm.value;
 
     const loginPayload: ILoginPayload = {
@@ -48,9 +51,11 @@ export class LoginComponent {
       .subscribe({
         next: (response) => {
           console.log('SUCCESS:', response);
+          this.isSpinning = false;
         },
         error: (err) => {
           console.error('ERROR:', err.error.error.message);
+          this.isSpinning = false;
         },
         complete: () => {
           console.info('COMPLETE:', 'Completed!');

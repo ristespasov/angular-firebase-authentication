@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
@@ -30,6 +31,7 @@ import { LocaleComponent } from './components/locale/locale.component';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     // components
@@ -44,6 +46,7 @@ import { LocaleComponent } from './components/locale/locale.component';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class SharedModule {}
