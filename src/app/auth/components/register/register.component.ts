@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
+import { AlertType } from 'src/app/shared/enums/alert.enum';
+import { AuthSuccessMessageType } from 'src/app/shared/enums/auth-message.enum';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { validationPatterns } from '../../../shared/constants/validation-patterns.constants';
 import { IRegisterPayload } from '../../interfaces/register.interface';
 import { AuthService } from '../../services/auth.service';
@@ -26,7 +30,11 @@ export class RegisterComponent {
     ]),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private alertService: AlertService,
+    private router: Router
+  ) {}
 
   onDestroy(): void {
     this.destroy$.next(void 0);
@@ -62,12 +70,19 @@ export class RegisterComponent {
       .pipe(take(1), takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log('SUCCESS:', response);
           this.isSpinning = false;
+          this.alertService.openSnackBar(
+            AuthSuccessMessageType.RegisterSuccess,
+            AlertType.Success
+          );
+          this.router.navigate(['login']);
         },
         error: (err) => {
-          console.error('ERROR:', err.error.error.message);
           this.isSpinning = false;
+          this.alertService.openSnackBar(
+            err.error.error.message,
+            AlertType.Error
+          );
         },
         complete: () => {
           console.info('COMPLETE:', 'Completed!');

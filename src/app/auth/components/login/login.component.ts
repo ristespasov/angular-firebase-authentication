@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
+import { AlertType } from 'src/app/shared/enums/alert.enum';
+import { AuthSuccessMessageType } from 'src/app/shared/enums/auth-message.enum';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { ILoginPayload } from '../../interfaces/login.interface';
 import { AuthService } from '../../services/auth.service';
 
@@ -19,7 +23,11 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private alertService: AlertService,
+    private router: Router
+  ) {}
 
   get email(): FormControl {
     return this.loginForm.get('email') as FormControl;
@@ -50,12 +58,19 @@ export class LoginComponent {
       .pipe(take(1), takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log('SUCCESS:', response);
           this.isSpinning = false;
+          this.alertService.openSnackBar(
+            AuthSuccessMessageType.LoginSuccess,
+            AlertType.Success
+          );
+          this.router.navigate(['/']);
         },
         error: (err) => {
-          console.error('ERROR:', err.error.error.message);
           this.isSpinning = false;
+          this.alertService.openSnackBar(
+            err.error.error.message,
+            AlertType.Error
+          );
         },
         complete: () => {
           console.info('COMPLETE:', 'Completed!');
