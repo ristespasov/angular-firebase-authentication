@@ -50,6 +50,10 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
+.mat-input-element {
+  height: 17px;
+}
+
 .mat-spinner {
   position: absolute !important;
   top: 50%;
