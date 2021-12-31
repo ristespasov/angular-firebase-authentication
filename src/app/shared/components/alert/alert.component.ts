@@ -4,7 +4,7 @@ import {
   MAT_SNACK_BAR_DATA,
 } from '@angular/material/snack-bar';
 import { AlertType } from '../../enums/alert.enum';
-import { AuthErrorMessageType } from '../../enums/auth-message.enum';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'smart-alert',
@@ -14,13 +14,14 @@ import { AuthErrorMessageType } from '../../enums/auth-message.enum';
 export class AlertComponent implements OnInit {
   constructor(
     @Inject(MAT_SNACK_BAR_DATA) public data: any,
-    public snackBarRef: MatSnackBarRef<AlertComponent>
-  ) {
-    console.log(data);
-  }
+    public snackBarRef: MatSnackBarRef<AlertComponent>,
+    public alertService: AlertService
+  ) {}
 
   ngOnInit() {
-    this.generateErrorMessage();
+    this.data.message = this.alertService.handleAuthErrorMessage(
+      this.data.message
+    );
   }
 
   get getClass(): any {
@@ -46,28 +47,6 @@ export class AlertComponent implements OnInit {
         return '../../../../assets/icons/info.png';
       case AlertType.Warning:
         return '../../../../assets/icons/warning.png';
-    }
-  }
-
-  generateErrorMessage(): any {
-    switch (this.data.message) {
-      case AuthErrorMessageType.EmailExists:
-        return (this.data.message =
-          'The email address is already in use by another account.');
-      case AuthErrorMessageType.OperationNotAlowed:
-        return (this.data.message =
-          'Password sign-in is disabled for this project.');
-      case AuthErrorMessageType.TooManyAttemptsTryLater:
-        return (this.data.message =
-          'We have blocked all requests from this device due to unusual activity. Try again later.');
-      case AuthErrorMessageType.EmailNotFound:
-        return (this.data.message =
-          'There is no user record corresponding to this identifier. The user may have been deleted.');
-      case AuthErrorMessageType.InvalidPassword:
-        return (this.data.message = 'The password you entered is incorrect.');
-      case AuthErrorMessageType.UserDisabled:
-        return (this.data.message =
-          'The user account has been disabled by an administrator.');
     }
   }
 }
