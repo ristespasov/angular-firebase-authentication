@@ -3,11 +3,17 @@
   align-items: center;
 }
 
+.alert-icon {
+  width: 24px;
+  display: flex;
+  align-items: center;
+}
+
 .alert-message {
   padding: 0 12px;
 }
 
 .alert-close {
   cursor: pointer;
-  margin-left: auto;
+  margin: 0 0 auto auto;
 }
