@@ -28,17 +28,11 @@
             placeholder="Password"
             formControlName="password"
           />
-          <button
-            mat-icon-button
-            matSuffix
-            (click)="isHidden = !isHidden"
-            [attr.aria-label]="'isHidden password'"
-            [attr.aria-pressed]="isHidden"
-          >
+          <span mat-icon-button matSuffix (click)="isHidden = !isHidden">
             <mat-icon>{{
               isHidden ? "visibility_off" : "visibility"
             }}</mat-icon>
-          </button>
+          </span>
           <div
             *ngIf="
               !password.touched ||
