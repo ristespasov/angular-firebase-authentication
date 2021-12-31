@@ -8,6 +8,6 @@ export enum AuthErrorMessageType {
 }
 
 export enum AuthSuccessMessageType {
-  RegisterSuccess = 'Success! Your account has been created.',
-  LoginSuccess = 'Successfully logged in.',
+  RegisterSuccess = 'Successfully registered!',
+  LoginSuccess = 'Successfully logged in!',
 }
