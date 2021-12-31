@@ -13,7 +13,7 @@ export class AlertService {
       snackType !== undefined ? snackType : AlertType.Error;
 
     this.snackBar.openFromComponent(AlertComponent, {
-      duration: 6000,
+      duration: 4000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       data: { message: message, snackType: alertType },
