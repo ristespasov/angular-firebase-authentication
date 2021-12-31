@@ -9,12 +9,13 @@ import { AuthErrorMessageType } from '../enums/auth-message.enum';
 })
 export class AlertService {
   constructor(private snackBar: MatSnackBar) {}
+
   public openSnackBar(message: string, snackType?: AlertType) {
     const alertType: AlertType =
       snackType !== undefined ? snackType : AlertType.Error;
 
     this.snackBar.openFromComponent(AlertComponent, {
-      duration: 4000,
+      duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       data: { message: message, snackType: alertType },
