@@ -59,7 +59,6 @@ export class LoginComponent {
       .subscribe({
         next: (response) => {
           this.isSpinning = false;
-          localStorage.setItem('token', response.idToken);
           console.log(response);
           this.alertService.openSnackBar(
             AuthSuccessMessageType.LoginSuccess,
