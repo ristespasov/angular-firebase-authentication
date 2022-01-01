@@ -7,6 +7,7 @@ import {
   IRegisterPayload,
   IRegisterResponse,
 } from '../interfaces/register.interface';
+import { IUser } from '../interfaces/user.interface';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -14,6 +15,7 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
+  tokenExpirationTimer: any;
 
   constructor(private http: HttpClient) {}
 
@@ -53,6 +55,29 @@ export class AuthService {
       );
   }
 
+  autoLogin() {
+    const userData: IUser = JSON.parse(localStorage.getItem('userData')!);
+
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      const expirationDuration =
+        new Date(userData._tokenExpirationDate).getTime() -
+        new Date().getTime();
+      this.autoLogout(expirationDuration);
+    }
+  }
+
   private handleAuthentication(
     email: string,
     userId: string,
@@ -62,9 +87,17 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
   logout() {
     this.user.next(null);
+    localStorage.clear();
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 }
