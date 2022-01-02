@@ -75,7 +75,7 @@ export class RegisterComponent {
             AuthSuccessMessageType.RegisterSuccess,
             AlertType.Success
           );
-          this.router.navigate(['login']);
+          this.router.navigate(['/']);
         },
         error: (err) => {
           this.isSpinning = false;
