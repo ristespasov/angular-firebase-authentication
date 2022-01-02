@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthErrorMessageType } from '../../auth/enums/auth-message.enum';
 import { AlertComponent } from '../components/alert/alert.component';
 import { AlertType } from '../enums/alert.enum';
-import { AuthErrorMessageType } from '../enums/auth-message.enum';
 
 @Injectable({
   providedIn: 'root',
