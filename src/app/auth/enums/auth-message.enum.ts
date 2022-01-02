@@ -5,6 +5,8 @@ export enum AuthErrorMessageType {
   EmailNotFound = 'EMAIL_NOT_FOUND',
   InvalidPassword = 'INVALID_PASSWORD',
   UserDisabled = 'USER_DISABLED',
+  ExpiredOobCode = 'EXPIRED_OOB_CODE',
+  InvalidOobCode = 'INVALID_OOB_CODE',
 }
 
 export enum AuthSuccessMessageType {
