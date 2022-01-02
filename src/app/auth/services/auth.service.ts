@@ -7,6 +7,10 @@ import {
   IRegisterPayload,
   IRegisterResponse,
 } from '../interfaces/register.interface';
+import {
+  IResetPasswordPayload,
+  IResetPasswordResponse,
+} from '../interfaces/reset-password.interface';
 import { IUser } from '../interfaces/user.interface';
 import { User } from '../models/user.model';
 
@@ -22,7 +26,7 @@ export class AuthService {
   register(registerPayload: IRegisterPayload): Observable<IRegisterResponse> {
     return this.http
       .post<IRegisterResponse>(
-        environment.baseUrl + environment.registerUrl + environment.API_KEY,
+        environment.authBaseUrl + environment.registerUrl + environment.API_KEY,
         registerPayload
       )
       .pipe(
@@ -40,7 +44,7 @@ export class AuthService {
   login(loginPayload: ILoginPayload): Observable<ILoginResponse> {
     return this.http
       .post<ILoginResponse>(
-        environment.baseUrl + environment.loginUrl + environment.API_KEY,
+        environment.authBaseUrl + environment.loginUrl + environment.API_KEY,
         loginPayload
       )
       .pipe(
@@ -99,5 +103,27 @@ export class AuthService {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
+  }
+
+  forgotPassword(
+    forgotPasswordPayload: IResetPasswordPayload
+  ): Observable<IResetPasswordResponse> {
+    return this.http.post<IResetPasswordResponse>(
+      environment.authBaseUrl +
+        environment.forgotPasswordUrl +
+        environment.API_KEY,
+      forgotPasswordPayload
+    );
+  }
+
+  resetPassword(
+    resetPasswordPayload: IResetPasswordPayload
+  ): Observable<IResetPasswordResponse> {
+    return this.http.post<IResetPasswordResponse>(
+      environment.authBaseUrl +
+        environment.resetPasswordUrl +
+        environment.API_KEY,
+      resetPasswordPayload
+    );
   }
 }
