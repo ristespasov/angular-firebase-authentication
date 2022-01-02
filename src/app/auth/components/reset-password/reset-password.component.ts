@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
 import { validationPatterns } from 'src/app/shared/constants/validation-patterns.constants';
 import { AlertType } from 'src/app/shared/enums/alert.enum';
+import { RouteType } from 'src/app/shared/enums/route.enum';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthSuccessMessageType } from '../../enums/auth-message.enum';
 import { IResetPasswordPayload } from '../../interfaces/reset-password.interface';
@@ -18,6 +19,7 @@ export class ResetPasswordComponent implements OnInit {
   destroy$ = new Subject();
   isHidden: boolean = true;
   isSpinning: boolean = false;
+  oobCode: string | undefined;
 
   resetPasswordForm = new FormGroup({
     password: new FormControl('', [
@@ -29,10 +31,13 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.oobCode = this.route.snapshot.queryParams['oobCode'];
+  }
 
   get password(): FormControl {
     return this.resetPasswordForm.get('password') as FormControl;
@@ -49,8 +54,8 @@ export class ResetPasswordComponent implements OnInit {
     const formValue = this.resetPasswordForm.value;
 
     const resetPasswordPayload: IResetPasswordPayload = {
-      oobCode: '',
-      password: formValue.password,
+      oobCode: this.oobCode,
+      newPassword: formValue.password,
     };
 
     this.authService
@@ -63,7 +68,7 @@ export class ResetPasswordComponent implements OnInit {
             AuthSuccessMessageType.ResetPasswordSuccess,
             AlertType.Success
           );
-          this.router.navigate(['login']);
+          this.router.navigate([RouteType.LOGIN]);
         },
         error: (err) => {
           this.isSpinning = false;

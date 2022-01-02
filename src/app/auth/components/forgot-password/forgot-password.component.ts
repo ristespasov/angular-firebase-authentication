@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
 import { AuthSuccessMessageType } from 'src/app/auth/enums/auth-message.enum';
 import { AlertType } from 'src/app/shared/enums/alert.enum';
+import { RouteType } from 'src/app/shared/enums/route.enum';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { RequestType } from '../../enums/request.enum';
 import { IResetPasswordPayload } from '../../interfaces/reset-password.interface';
@@ -62,7 +63,7 @@ export class ForgotPasswordComponent implements OnInit {
             AuthSuccessMessageType.ResetEmailSentSuccess,
             AlertType.Success
           );
-          this.router.navigate(['login']);
+          this.router.navigate([RouteType.LOGIN]);
         },
         error: (err) => {
           this.isSpinning = false;
