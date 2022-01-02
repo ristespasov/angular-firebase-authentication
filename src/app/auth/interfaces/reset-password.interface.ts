@@ -1,7 +1,7 @@
 export interface IResetPasswordPayload {
   requestType?: string;
   oobCode?: string;
-  password?: string;
+  newPassword?: string;
   email?: string;
 }
 
