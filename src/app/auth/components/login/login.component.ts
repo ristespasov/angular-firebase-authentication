@@ -37,6 +37,11 @@ export class LoginComponent {
     return this.loginForm.get('password') as FormControl;
   }
 
+  onDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.complete();
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
