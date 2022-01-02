@@ -19,7 +19,7 @@ export class ForgotPasswordComponent implements OnInit {
   destroy$ = new Subject();
   isHidden: boolean = true;
   isSpinning: boolean = false;
-  requestType: string = RequestType.PasswordReset;
+  requestType: string = RequestType.PASSWORD_RESET;
 
   forgotPasswordForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -60,8 +60,8 @@ export class ForgotPasswordComponent implements OnInit {
           this.isSpinning = false;
           console.log(response);
           this.alertService.openSnackBar(
-            AuthSuccessMessageType.ResetEmailSentSuccess,
-            AlertType.Success
+            AuthSuccessMessageType.RESET_EMAIL_SENT_SUCCESS,
+            AlertType.SUCCESS
           );
           this.router.navigate([RouteType.LOGIN]);
         },
@@ -69,7 +69,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.isSpinning = false;
           this.alertService.openSnackBar(
             err.error.error.message,
-            AlertType.Error
+            AlertType.ERROR
           );
         },
         complete: () => {

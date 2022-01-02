@@ -12,7 +12,7 @@ export class AlertService {
 
   public openSnackBar(message: string, snackType?: AlertType) {
     const alertType: AlertType =
-      snackType !== undefined ? snackType : AlertType.Error;
+      snackType !== undefined ? snackType : AlertType.ERROR;
 
     this.snackBar.openFromComponent(AlertComponent, {
       duration: 3000,
@@ -24,25 +24,25 @@ export class AlertService {
 
   handleAuthErrorMessage(value: any) {
     switch (value) {
-      case AuthErrorMessageType.EmailExists:
+      case AuthErrorMessageType.EMAIL_EXISTS:
         return (value =
           'The email address is already in use by another account.');
-      case AuthErrorMessageType.OperationNotAlowed:
+      case AuthErrorMessageType.OPERATION_NOT_ALLOWED:
         return (value = 'Password sign-in is disabled for this project.');
-      case AuthErrorMessageType.TooManyAttemptsTryLater:
+      case AuthErrorMessageType.TOO_MANY_ATTEMPTS_TRY_LATER:
         return (value =
           'We have blocked all requests from this device due to unusual activity. Try again later.');
-      case AuthErrorMessageType.EmailNotFound:
+      case AuthErrorMessageType.EMAIL_NOT_FOUND:
         return (value =
           'There is no user record corresponding to this identifier. The user may have been deleted.');
-      case AuthErrorMessageType.InvalidPassword:
+      case AuthErrorMessageType.INVALID_PASSWORD:
         return (value = 'The password you entered is incorrect.');
-      case AuthErrorMessageType.UserDisabled:
+      case AuthErrorMessageType.USER_DISABLED:
         return (value =
           'The user account has been disabled by an administrator.');
-      case AuthErrorMessageType.ExpiredOobCode:
+      case AuthErrorMessageType.EXPIRED_OOB_CODE:
         return (value = 'The action code has expired.');
-      case AuthErrorMessageType.InvalidOobCode:
+      case AuthErrorMessageType.INVALID_OOB_CODE:
         return (value =
           'The action code is invalid. This can happen if the code is malformed, expired, or has already been used.');
     }

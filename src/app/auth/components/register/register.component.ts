@@ -72,8 +72,8 @@ export class RegisterComponent {
         next: (response) => {
           this.isSpinning = false;
           this.alertService.openSnackBar(
-            AuthSuccessMessageType.RegisterSuccess,
-            AlertType.Success
+            AuthSuccessMessageType.REGISTER_SUCCESS,
+            AlertType.SUCCESS
           );
           this.router.navigate(['/']);
         },
@@ -81,7 +81,7 @@ export class RegisterComponent {
           this.isSpinning = false;
           this.alertService.openSnackBar(
             err.error.error.message,
-            AlertType.Error
+            AlertType.ERROR
           );
         },
         complete: () => {

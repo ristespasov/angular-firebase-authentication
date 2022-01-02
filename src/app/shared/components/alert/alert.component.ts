@@ -26,26 +26,26 @@ export class AlertComponent implements OnInit {
 
   get getClass(): any {
     switch (this.data.snackType) {
-      case AlertType.Success:
+      case AlertType.SUCCESS:
         return 'success';
-      case AlertType.Error:
+      case AlertType.ERROR:
         return 'error';
-      case AlertType.Info:
+      case AlertType.INFO:
         return 'info';
-      case AlertType.Warning:
+      case AlertType.WARNING:
         return 'warning';
     }
   }
 
   get getIcon(): any {
     switch (this.data.snackType) {
-      case AlertType.Success:
+      case AlertType.SUCCESS:
         return '../../../../assets/icons/success.png';
-      case AlertType.Error:
+      case AlertType.ERROR:
         return '../../../assets/icons/error.png';
-      case AlertType.Info:
+      case AlertType.INFO:
         return '../../../../assets/icons/info.png';
-      case AlertType.Warning:
+      case AlertType.WARNING:
         return '../../../../assets/icons/warning.png';
     }
   }

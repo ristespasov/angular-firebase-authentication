@@ -65,8 +65,8 @@ export class ResetPasswordComponent implements OnInit {
         next: (response) => {
           this.isSpinning = false;
           this.alertService.openSnackBar(
-            AuthSuccessMessageType.ResetPasswordSuccess,
-            AlertType.Success
+            AuthSuccessMessageType.RESET_PASSWORD_SUCCESS,
+            AlertType.SUCCESS
           );
           this.router.navigate([RouteType.LOGIN]);
         },
@@ -74,7 +74,7 @@ export class ResetPasswordComponent implements OnInit {
           this.isSpinning = false;
           this.alertService.openSnackBar(
             err.error.error.message,
-            AlertType.Error
+            AlertType.ERROR
           );
         },
         complete: () => {

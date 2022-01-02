@@ -1,3 +1,3 @@
 export enum RequestType {
-  PasswordReset = 'PASSWORD_RESET',
+  PASSWORD_RESET = 'PASSWORD_RESET',
 }

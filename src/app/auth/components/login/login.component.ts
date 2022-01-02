@@ -66,8 +66,8 @@ export class LoginComponent {
           this.isSpinning = false;
           console.log(response);
           this.alertService.openSnackBar(
-            AuthSuccessMessageType.LoginSuccess,
-            AlertType.Success
+            AuthSuccessMessageType.LOGIN_SUCCESS,
+            AlertType.SUCCESS
           );
           this.router.navigate(['/']);
         },
@@ -75,7 +75,7 @@ export class LoginComponent {
           this.isSpinning = false;
           this.alertService.openSnackBar(
             err.error.error.message,
-            AlertType.Error
+            AlertType.ERROR
           );
         },
         complete: () => {
