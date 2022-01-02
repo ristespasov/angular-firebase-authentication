@@ -40,6 +40,11 @@ export class AlertService {
       case AuthErrorMessageType.UserDisabled:
         return (value =
           'The user account has been disabled by an administrator.');
+      case AuthErrorMessageType.ExpiredOobCode:
+        return (value = 'The action code has expired.');
+      case AuthErrorMessageType.InvalidOobCode:
+        return (value =
+          'The action code is invalid. This can happen if the code is malformed, expired, or has already been used.');
     }
     return value;
   }
