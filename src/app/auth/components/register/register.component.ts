@@ -41,14 +41,6 @@ export class RegisterComponent {
     this.destroy$.complete();
   }
 
-  get email(): FormControl {
-    return this.registerForm.get('email') as FormControl;
-  }
-
-  get password(): FormControl {
-    return this.registerForm.get('password') as FormControl;
-  }
-
   onSubmit() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -88,5 +80,13 @@ export class RegisterComponent {
           console.info('COMPLETE:', 'Completed!');
         },
       });
+  }
+
+  get email(): FormControl {
+    return this.registerForm.get('email') as FormControl;
+  }
+
+  get password(): FormControl {
+    return this.registerForm.get('password') as FormControl;
   }
 }

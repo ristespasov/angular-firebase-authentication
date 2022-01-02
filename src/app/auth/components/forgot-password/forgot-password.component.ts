@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
@@ -15,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['../../styles/auth.component.scss'],
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
   destroy$ = new Subject();
   isHidden: boolean = true;
   isSpinning: boolean = false;
@@ -31,10 +31,9 @@ export class ForgotPasswordComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
-
-  get email(): FormControl {
-    return this.forgotPasswordForm.get('email') as FormControl;
+  onDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.complete();
   }
 
   onSubmit() {
@@ -76,5 +75,9 @@ export class ForgotPasswordComponent implements OnInit {
           console.info('COMPLETE:', 'Completed!');
         },
       });
+  }
+
+  get email(): FormControl {
+    return this.forgotPasswordForm.get('email') as FormControl;
   }
 }

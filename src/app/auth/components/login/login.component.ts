@@ -29,14 +29,6 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  get email(): FormControl {
-    return this.loginForm.get('email') as FormControl;
-  }
-
-  get password(): FormControl {
-    return this.loginForm.get('password') as FormControl;
-  }
-
   onDestroy(): void {
     this.destroy$.next(void 0);
     this.destroy$.complete();
@@ -82,5 +74,13 @@ export class LoginComponent {
           console.info('COMPLETE:', 'Completed!');
         },
       });
+  }
+
+  get email(): FormControl {
+    return this.loginForm.get('email') as FormControl;
+  }
+
+  get password(): FormControl {
+    return this.loginForm.get('password') as FormControl;
   }
 }

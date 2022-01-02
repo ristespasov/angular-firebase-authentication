@@ -39,8 +39,9 @@ export class ResetPasswordComponent implements OnInit {
     this.oobCode = this.route.snapshot.queryParams['oobCode'];
   }
 
-  get password(): FormControl {
-    return this.resetPasswordForm.get('password') as FormControl;
+  onDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.complete();
   }
 
   onSubmit() {
@@ -83,8 +84,7 @@ export class ResetPasswordComponent implements OnInit {
       });
   }
 
-  onDestroy(): void {
-    this.destroy$.next(void 0);
-    this.destroy$.complete();
+  get password(): FormControl {
+    return this.resetPasswordForm.get('password') as FormControl;
   }
 }
