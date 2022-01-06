@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
 import { AuthSuccessMessageType } from 'src/app/auth/enums/auth-message.enum';
 import { AlertType } from 'src/app/shared/enums/alert.enum';
+import { PasswordMatchValidator } from 'src/app/shared/providers/password-match-validator';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { validationPatterns } from '../../../shared/constants/validation-patterns.constants';
 import { IRegisterPayload } from '../../interfaces/register.interface';
@@ -27,6 +28,11 @@ export class RegisterComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.pattern(validationPatterns.password),
+      PasswordMatchValidator.matchValidator('confirmPassword', true),
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      PasswordMatchValidator.matchValidator('password'),
     ]),
   });
 
@@ -88,5 +94,9 @@ export class RegisterComponent {
 
   get password(): FormControl {
     return this.registerForm.get('password') as FormControl;
+  }
+
+  get confirmPassword(): FormControl {
+    return this.registerForm.get('confirmPassword') as FormControl;
   }
 }

@@ -5,6 +5,7 @@ import { Subject, take, takeUntil } from 'rxjs';
 import { validationPatterns } from 'src/app/shared/constants/validation-patterns.constants';
 import { AlertType } from 'src/app/shared/enums/alert.enum';
 import { RouteType } from 'src/app/shared/enums/route.enum';
+import { PasswordMatchValidator } from 'src/app/shared/providers/password-match-validator';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthSuccessMessageType } from '../../enums/auth-message.enum';
 import { IResetPasswordPayload } from '../../interfaces/reset-password.interface';
@@ -25,6 +26,12 @@ export class ResetPasswordComponent implements OnInit {
     password: new FormControl('', [
       Validators.required,
       Validators.pattern(validationPatterns.password),
+      PasswordMatchValidator.matchValidator('confirmPassword', true),
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.pattern(validationPatterns.password),
+      PasswordMatchValidator.matchValidator('password'),
     ]),
   });
 
@@ -86,5 +93,9 @@ export class ResetPasswordComponent implements OnInit {
 
   get password(): FormControl {
     return this.resetPasswordForm.get('password') as FormControl;
+  }
+
+  get confirmPassword(): FormControl {
+    return this.resetPasswordForm.get('confirmPassword') as FormControl;
   }
 }

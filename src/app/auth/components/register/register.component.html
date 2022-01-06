@@ -52,6 +52,34 @@
             >Please choose a stronger password</mat-error
           >
         </mat-form-field>
+        <mat-form-field appearance="outline" class="gutter-top">
+          <mat-label>Confirm password</mat-label>
+          <input
+            matInput
+            type="password"
+            [type]="isHidden ? 'password' : 'text'"
+            placeholder="Confirm password"
+            formControlName="confirmPassword"
+          />
+          <span mat-icon-button matSuffix (click)="isHidden = !isHidden">
+            <mat-icon>{{
+              isHidden ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </span>
+          <mat-error
+            *ngIf="
+              confirmPassword.touched && confirmPassword.hasError('required')
+            "
+            >Confirm password is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !confirmPassword?.hasError('required') &&
+              confirmPassword.hasError('matching')
+            "
+            >Passwords do not match</mat-error
+          >
+        </mat-form-field>
         <button
           mat-raised-button
           color="primary"
