@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-    canActivate: [HomeGuard],
+    canActivate: [HomeGuard, RedirectGuard],
   },
   {
     path: '__/auth/action',
