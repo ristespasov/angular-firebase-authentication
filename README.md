@@ -1,4 +1,4 @@
-# Amgular firebase authentication
+# Angular firebase authentication
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
 
